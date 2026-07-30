@@ -1,6 +1,264 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Hone — Poker Trainer</title><style>body{font-family:-apple-system,system-ui,sans-serif;max-width:640px;margin:40px auto;padding:0 20px;line-height:1.6;color:#1a1a1a}h1{font-size:1.6em}a{color:#b0413e}</style></head><body>
-<h1>Hone — Poker Trainer</h1>
-<p>Hone teaches winning no-limit hold'em cash games: a 20-hand assessment finds your level, lessons and drills fix your leaks, and a full-table practice mode grades every decision with real math.</p>
-<p>Hone is an educational training app. Play money only — no real-money gambling, no prizes, no wagering.</p>
-<p><a href="privacy.html">Privacy Policy</a> · <a href="support.html">Support</a></p>
-</body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hone — Cash-game poker, taught properly.</title>
+<meta name="description" content="A 20-hand assessment maps your game. Lessons, drills, and a live table grade every decision — real math, plain English. Play money only.">
+<meta property="og:title" content="Hone — Poker Trainer">
+<meta property="og:description" content="Learn winning no-limit hold'em. Every decision graded by a real poker engine.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0E0C0A; --bg2:#14110E; --panel:#1A1611; --line:#2A241D;
+  --cream:#F2EDE3; --muted:#A29786; --dim:#6E6558;
+  --red:#D6553F; --red-deep:#B0413E;
+  --serif:"Fraunces",Georgia,serif; --sans:"Inter",-apple-system,system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+body{background:var(--bg);color:var(--cream);font-family:var(--sans);line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--red);color:var(--cream)}
+
+/* ── nav ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+  padding:18px 32px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(14,12,10,.72);border-bottom:1px solid transparent;transition:border-color .3s}
+nav.scrolled{border-bottom-color:var(--line)}
+.wordmark{font-family:var(--serif);font-weight:600;font-size:22px;letter-spacing:.04em}
+.wordmark span{color:var(--red)}
+.navlinks{display:flex;align-items:center;gap:28px;font-size:14px;color:var(--muted)}
+.navlinks a:hover{color:var(--cream)}
+.btn{display:inline-block;background:var(--cream);color:#141210;font-weight:600;font-size:15px;
+  padding:12px 24px;border-radius:999px;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 8px 30px rgba(242,237,227,.15)}
+.btn.small{padding:9px 18px;font-size:13.5px}
+.btn.ghost{background:transparent;color:var(--cream);border:1px solid var(--line)}
+.btn.ghost:hover{border-color:var(--muted);box-shadow:none}
+
+/* ── hero ── */
+.hero{position:relative;min-height:100vh;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;
+  gap:40px;padding:140px 8vw 80px;max-width:1400px;margin:0 auto}
+.eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.22em;color:var(--red);text-transform:uppercase;margin-bottom:22px}
+h1{font-family:var(--serif);font-weight:300;font-size:clamp(44px,6.2vw,86px);line-height:1.04;letter-spacing:-.01em}
+h1 em{font-style:italic;font-weight:400;color:var(--red)}
+.sub{color:var(--muted);font-size:18px;max-width:34em;margin:28px 0 36px}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.cta-note{font-family:var(--mono);font-size:12px;color:var(--dim);margin-top:18px}
+
+/* floating suits */
+.suit{position:absolute;font-size:180px;color:var(--cream);opacity:.028;user-select:none;pointer-events:none;z-index:-1;
+  animation:drift 26s ease-in-out infinite alternate}
+@keyframes drift{from{transform:translateY(-18px) rotate(-8deg)}to{transform:translateY(22px) rotate(9deg)}}
+
+/* phone */
+.phone-wrap{display:flex;justify-content:center;perspective:1200px}
+.phone{width:min(320px,72vw);border-radius:44px;border:1px solid #2E2822;background:#000;
+  padding:10px;box-shadow:0 40px 90px rgba(0,0,0,.6),0 0 0 1px rgba(242,237,227,.04);
+  transform:rotateY(-8deg) rotateX(2deg);transition:transform .5s ease}
+.phone:hover{transform:rotateY(-2deg) rotateX(0deg)}
+.phone img{width:100%;display:block;border-radius:34px}
+
+/* ── stat strip ── */
+.strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg2)}
+.strip-inner{max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;padding:26px 8vw}
+.stat{font-family:var(--mono);font-size:13px;color:var(--muted);letter-spacing:.06em}
+.stat b{color:var(--cream);font-weight:500}
+
+/* ── sections ── */
+section{padding:110px 8vw;max-width:1400px;margin:0 auto}
+.kicker{font-family:var(--mono);font-size:12.5px;letter-spacing:.22em;color:var(--red);text-transform:uppercase;margin-bottom:16px}
+h2{font-family:var(--serif);font-weight:300;font-size:clamp(32px,4vw,54px);line-height:1.1;letter-spacing:-.01em;max-width:16em}
+.lead{color:var(--muted);font-size:17px;max-width:36em;margin-top:20px}
+
+/* features */
+.feature{display:grid;grid-template-columns:1fr 1fr;gap:8vw;align-items:center;padding:70px 0;border-top:1px solid var(--line)}
+.feature.first{border-top:none;margin-top:50px}
+.feature .num{font-family:var(--mono);color:var(--dim);font-size:13px;letter-spacing:.2em;margin-bottom:14px}
+.feature h3{font-family:var(--serif);font-weight:400;font-size:clamp(26px,2.6vw,36px);line-height:1.15;margin-bottom:14px}
+.feature p{color:var(--muted);max-width:30em}
+.feature .shot{display:flex;justify-content:center}
+.feature .shot img{width:min(300px,70vw);border-radius:30px;border:1px solid #2E2822;
+  box-shadow:0 30px 70px rgba(0,0,0,.55)}
+.feature.flip .shot{order:-1}
+
+/* math section */
+.math{background:var(--panel);border:1px solid var(--line);border-radius:28px;padding:64px 7vw;margin-top:40px}
+.equity{margin-top:44px;max-width:560px}
+.equity-labels{display:flex;justify-content:space-between;font-family:var(--mono);font-size:13px;color:var(--muted);margin-bottom:10px}
+.equity-labels b{color:var(--cream)}
+.bar{height:10px;border-radius:999px;background:#2E241E;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--cream);border-radius:999px;transition:width 1.4s cubic-bezier(.2,.7,.2,1)}
+.reveal.on .bar i{width:87%}
+.mathnote{font-family:var(--mono);font-size:12.5px;color:var(--dim);margin-top:14px}
+
+/* private */
+.private-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:22px;overflow:hidden;margin-top:48px}
+.private-cell{background:var(--bg2);padding:34px 30px}
+.private-cell h4{font-family:var(--serif);font-weight:400;font-size:20px;margin-bottom:8px}
+.private-cell p{color:var(--muted);font-size:14.5px}
+
+/* cta band */
+.band{text-align:center;padding:140px 8vw}
+.band h2{margin:0 auto 16px;max-width:none}
+.band .lead{margin:0 auto 40px}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding:44px 8vw 60px;color:var(--dim);font-size:13.5px}
+.foot-inner{max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
+.foot-links{display:flex;gap:22px}
+.foot-links a{color:var(--muted)}
+.foot-links a:hover{color:var(--cream)}
+.disclaimer{max-width:1200px;margin:18px auto 0;font-size:12.5px;line-height:1.7}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal.on{opacity:1;transform:none}
+
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;padding-top:120px;text-align:left;min-height:auto}
+  .phone-wrap{margin-top:30px}
+  .feature{grid-template-columns:1fr;gap:36px}
+  .feature.flip .shot{order:0}
+  .navlinks .hide-m{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a class="wordmark" href="#top">HONE<span>&nbsp;♦</span></a>
+  <div class="navlinks">
+    <a class="hide-m" href="#how">How it works</a>
+    <a class="hide-m" href="#math">The math</a>
+    <a href="privacy.html">Privacy</a>
+    <a class="btn small" href="#get">Get the app</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <span class="suit" style="top:12%;left:4%">♠</span>
+  <span class="suit" style="bottom:8%;left:38%;animation-delay:-9s">♥</span>
+  <span class="suit" style="top:30%;right:6%;animation-delay:-17s">♣</span>
+  <div>
+    <p class="eyebrow">No-Limit Hold'em · Cash Game Training</p>
+    <h1>Cash-game poker, <em>taught properly.</em></h1>
+    <p class="sub">A 20-hand assessment maps your game and finds your leaks. Then lessons, drills, and a live table grade every decision you make — with real math, explained in plain English.</p>
+    <div class="cta-row">
+      <a class="btn" href="#get">Download on the App&nbsp;Store</a>
+      <a class="btn ghost" href="#how">See how it works</a>
+    </div>
+    <p class="cta-note">FREE · NO ACCOUNT · PLAY MONEY ONLY · 18+</p>
+  </div>
+  <div class="phone-wrap">
+    <div class="phone"><img src="img/01-first-run.png" alt="Hone first-run screen: twenty hands to map your game"></div>
+  </div>
+</header>
+
+<div class="strip">
+  <div class="strip-inner">
+    <span class="stat"><b>20-hand</b> assessment</span>
+    <span class="stat"><b>7 modules</b> of lessons</span>
+    <span class="stat"><b>5 opponent</b> personalities</span>
+    <span class="stat"><b>100% on-device</b> math</span>
+    <span class="stat"><b>0 bytes</b> leave your phone</span>
+  </div>
+</div>
+
+<section id="how">
+  <p class="kicker reveal">How it works</p>
+  <h2 class="reveal">Four surfaces. One number that tells you you're getting better.</h2>
+
+  <div class="feature first reveal">
+    <div>
+      <p class="num">01 — ASSESS</p>
+      <h3>Twenty hands to find your level.</h3>
+      <p>Real spots across preflop, flop, turn, and river. You get a skill rating out of 100 and a leak radar showing exactly where you're losing money.</p>
+    </div>
+    <div class="shot"><img src="img/03-assessment-results.png" alt="Assessment results with skill rating"></div>
+  </div>
+
+  <div class="feature flip reveal">
+    <div>
+      <p class="num">02 — DRILL</p>
+      <h3>Practice the exact spots you get wrong.</h3>
+      <p>Every answer is graded by a real poker engine — equity simulated live, EV computed, and a coach's note on what the better line was and the cue to look for next time.</p>
+    </div>
+    <div class="shot"><img src="img/06-drill-graded.png" alt="Graded drill with equity bar and coach note"></div>
+  </div>
+
+  <div class="feature reveal">
+    <div>
+      <p class="num">03 — PLAY</p>
+      <h3>Sit at a full table that grades you.</h3>
+      <p>Six-max hands against opponents with genuinely different styles — tight, loose, aggressive, passive — with real betting, side pots, and showdowns.</p>
+    </div>
+    <div class="shot"><img src="img/07-table-dealt.png" alt="Six-max poker table"></div>
+  </div>
+
+  <div class="feature flip reveal">
+    <div>
+      <p class="num">04 — REVIEW</p>
+      <h3>Replay any hand, street by street.</h3>
+      <p>See your actual equity at every decision point, what the opponent's line meant, and which single decision cost you the most.</p>
+    </div>
+    <div class="shot"><img src="img/09-hand-review.png" alt="Street-by-street hand review"></div>
+  </div>
+</section>
+
+<section id="math">
+  <div class="math reveal">
+    <p class="kicker">Honest math, no gimmicks</p>
+    <h2>The math is never wrong.</h2>
+    <p class="lead">Every verdict comes from a deterministic poker engine running on your phone — hand evaluation, Monte Carlo equity simulation, range modeling, and EV analysis. Nothing is hand-waved, and no number is ever invented.</p>
+    <div class="equity">
+      <div class="equity-labels"><span>YOU <b>87%</b></span><span>THEM <b>13%</b></span></div>
+      <div class="bar"><i></i></div>
+      <p class="mathnote">Live equity, simulated on the spot — watch the math run, hand by hand.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="kicker reveal">Private by design</p>
+  <h2 class="reveal">Your game stays on your phone.</h2>
+  <div class="private-grid reveal">
+    <div class="private-cell"><h4>No account</h4><p>No sign-up, no login, no email. Open the app and play.</p></div>
+    <div class="private-cell"><h4>No tracking</h4><p>No analytics, no ads, no third-party SDKs. Zero network requests.</p></div>
+    <div class="private-cell"><h4>No real money</h4><p>Play money only. An educational trainer — nothing to wager, ever.</p></div>
+    <div class="private-cell"><h4>On-device AI</h4><p>Coaching notes are generated on your phone. Nothing leaves it.</p></div>
+  </div>
+</section>
+
+<section class="band" id="get">
+  <p class="kicker reveal">Free on iPhone</p>
+  <h2 class="reveal">Find your level.</h2>
+  <p class="lead reveal">Twenty hands is all it takes to know where you stand.</p>
+  <div class="reveal"><a class="btn" href="#" id="store-link">Download on the App&nbsp;Store</a>
+  <p class="cta-note">Launching soon — link goes live with App Review approval.</p></div>
+</section>
+
+<footer>
+  <div class="foot-inner">
+    <span class="wordmark" style="font-size:18px">HONE<span style="color:var(--red)">&nbsp;♦</span></span>
+    <div class="foot-links">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="support.html">Support</a>
+      <a href="mailto:sumer@enclave.money">Contact</a>
+    </div>
+  </div>
+  <p class="disclaimer">Hone is an educational poker training app made by Enclave HK Limited. It uses play money only — there is no real-money gambling, no prizes, and no way to wager anything. Rated 18+ on the App Store for simulated gambling. © 2026 Enclave HK Limited.</p>
+</footer>
+
+<script>
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>10),{passive:true});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.18});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

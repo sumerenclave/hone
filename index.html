@@ -10,9 +10,6 @@
 <meta property="og:url" content="https://hone.fun/">
 <meta property="og:title" content="Hone · Poker Trainer">
 <meta property="og:description" content="Every decision graded by a real poker engine. Free on iPhone.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#0D0B09;            /* warm near-black */
@@ -27,8 +24,8 @@
   --on-cream-mute:rgba(23,19,14,.6);
   --line-dark:rgba(242,237,227,.12);
   --line-cream:rgba(23,19,14,.14);
-  --serif:"Instrument Serif","Iowan Old Style",Baskerville,Georgia,serif;
-  --sans:"Onest",-apple-system,system-ui,sans-serif;
+  --display:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   --ease:cubic-bezier(.22,1,.36,1);
   --pad:clamp(20px,3.4vw,48px);
 }
@@ -40,11 +37,11 @@ a{color:inherit;text-decoration:none}
 img{max-width:100%;height:auto;display:block}
 ::selection{background:var(--red);color:var(--on-dark)}
 
-h1,h2,h3{font-family:var(--serif);font-weight:400;font-style:normal}
-h1{font-size:clamp(48px,8vw,104px);line-height:.95;letter-spacing:-.018em}
-h2{font-size:clamp(36px,4.8vw,60px);line-height:1.05;letter-spacing:-.014em}
-h3{font-size:clamp(32px,3.8vw,48px);line-height:1.05;letter-spacing:-.012em}
-em{font-style:italic;color:var(--red)}
+h1,h2,h3{font-family:var(--display);font-weight:600;font-style:normal}
+h1{font-size:clamp(44px,6.6vw,84px);line-height:1.02;letter-spacing:-.022em}
+h2{font-size:clamp(32px,4.2vw,52px);line-height:1.06;letter-spacing:-.02em}
+h3{font-size:clamp(28px,3.3vw,40px);line-height:1.08;letter-spacing:-.018em}
+em{font-style:normal;color:var(--red)}
 
 .container{max-width:1320px;margin:0 auto;padding:0 var(--pad)}
 
@@ -92,7 +89,7 @@ nav.dark .navlinks a:hover{color:var(--on-dark)}
    outranks the .navlinks a colour rules above */
 .navlinks a.nav-cta{background:var(--ink);color:var(--cream)}
 nav.dark .navlinks a.nav-cta{background:var(--on-dark);color:var(--ink)}
-.wordmark{font-family:var(--serif);font-style:italic;font-size:23px;letter-spacing:-.01em}
+.wordmark{font-family:var(--display);font-weight:700;font-size:21px;letter-spacing:-.02em}
 .wordmark i{font-style:normal;color:var(--red)}
 .navlinks{display:flex;align-items:center;gap:28px;font-size:14px;color:var(--on-dark-mute)}
 .navlinks a{transition:color .25s}
@@ -167,7 +164,7 @@ nav.dark .navlinks a.nav-cta{background:var(--on-dark);color:var(--ink)}
 .card+.card{padding-left:22px;border-left:1px solid var(--line-cream)}
 .card .glyph{font-size:24px;line-height:1;margin-bottom:20px;color:var(--ink)}
 .card .glyph.r{color:var(--red)}
-.card h4{font-family:var(--serif);font-weight:400;font-size:23px;letter-spacing:-.02em;margin-bottom:10px}
+.card h4{font-family:var(--display);font-weight:600;font-size:20px;letter-spacing:-.015em;margin-bottom:10px}
 .card p{font-size:15px;color:var(--on-cream-mute)}
 
 /* inset panel — the big stat moment */
@@ -176,8 +173,8 @@ nav.dark .navlinks a.nav-cta{background:var(--on-dark);color:var(--ink)}
   display:grid;grid-template-columns:minmax(0,460px) minmax(0,1fr);gap:clamp(36px,5vw,72px);align-items:center}
 .panel h2{color:var(--ink)}
 .panel .lead{color:var(--on-cream-mute);font-size:17px;margin-top:22px}
-.stat{font-family:var(--serif);font-weight:400;font-size:clamp(84px,11vw,152px);line-height:.86;
-  letter-spacing:-.02em;color:var(--ink)}
+.stat{font-family:var(--display);font-weight:600;font-size:clamp(80px,10vw,140px);line-height:.9;
+  letter-spacing:-.03em;color:var(--ink);font-variant-numeric:tabular-nums}
 .stat-rule{border:none;border-top:1px solid var(--line-cream);margin:26px 0 16px}
 .stat-label{font-size:15px;color:var(--on-cream-mute)}
 .bar{height:10px;border-radius:999px;background:rgba(23,19,14,.12);overflow:hidden;margin-top:26px;max-width:460px}

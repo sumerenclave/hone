@@ -4,12 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="apple-itunes-app" content="app-id=6792246009">
+<link rel="icon" type="image/png" sizes="64x64" href="img/icon-64.png">
+<link rel="icon" type="image/png" sizes="192x192" href="img/icon-192.png">
+<link rel="apple-touch-icon" href="img/icon-192.png">
 <title>Hone · Cash-game poker, taught properly.</title>
 <meta name="description" content="Hone deals you real spots, grades every decision with real math, and tells you in plain English where the money leaks. Free on iPhone. Play money only.">
 <link rel="canonical" href="https://hone.fun/">
 <meta property="og:url" content="https://hone.fun/">
 <meta property="og:title" content="Hone · Poker Trainer">
 <meta property="og:description" content="Every decision graded by a real poker engine. Free on iPhone.">
+<meta property="og:image" content="https://hone.fun/img/icon-1024.png">
 <style>
 :root{
   --bg:#0D0B09;            /* warm near-black */
@@ -89,7 +93,9 @@ nav.dark .navlinks a:hover{color:var(--on-dark)}
    outranks the .navlinks a colour rules above */
 .navlinks a.nav-cta{background:var(--ink);color:var(--cream)}
 nav.dark .navlinks a.nav-cta{background:var(--on-dark);color:var(--ink)}
-.wordmark{font-family:var(--display);font-weight:700;font-size:21px;letter-spacing:-.02em}
+.wordmark{display:inline-flex;align-items:center;gap:10px;font-family:var(--display);
+  font-weight:700;font-size:20px;letter-spacing:-.02em}
+.wordmark img{width:34px;height:34px;border-radius:8.5px;display:block}
 .wordmark i{font-style:normal;color:var(--red)}
 .navlinks{display:flex;align-items:center;gap:28px;font-size:14px;color:var(--on-dark-mute)}
 .navlinks a{transition:color .25s}
@@ -237,7 +243,7 @@ footer{border-top:1px solid var(--line-dark);padding:clamp(52px,6vw,72px) 0 48px
 <body>
 
 <nav id="nav">
-  <a class="wordmark" href="#top">Hone<i>&hairsp;♦</i></a>
+  <a class="wordmark" href="#top"><img src="img/icon-64.png" alt="" width="64" height="64">Hone</a>
   <div class="navlinks">
     <a class="hide-m" href="#how">How it works</a>
     <a class="hide-m" href="#math">The math</a>
@@ -343,7 +349,8 @@ footer{border-top:1px solid var(--line-dark);padding:clamp(52px,6vw,72px) 0 48px
       <div class="panel fade" id="panel">
         <div>
           <h2 data-split>The math is never wrong.</h2>
-          <p class="lead">Every verdict traces back to a real poker engine running on your phone: hand evaluation, equity, range modelling, EV. Tap “Run it” and watch the math happen.</p>
+          <p class="lead">The showdown math is exact: equity is counted by enumerating every runout — never sampled — and verified against the published tables.</p>
+          <p class="lead">And Hone is honest about the rest. It is not a GTO solver, on purpose: verdicts come from a transparent teaching model — pot odds, ranges, minimum-defence math — that compares every action inside the same model and explains every number in plain English. Exact where poker is exact, and clear about where it approximates.</p>
         </div>
         <div>
           <div class="stat">87%</div>
@@ -387,7 +394,7 @@ footer{border-top:1px solid var(--line-dark);padding:clamp(52px,6vw,72px) 0 48px
     <div class="container">
       <div class="foot">
         <div class="brand">
-          <span class="wordmark">hone<i>.fun&hairsp;♦</i></span>
+          <span class="wordmark"><img src="img/icon-64.png" alt="" width="64" height="64">hone<i>.fun</i></span>
           <p class="tagline">An educational poker trainer that grades every decision you make, and explains why.</p>
         </div>
         <div>

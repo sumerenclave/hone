@@ -71,7 +71,7 @@ em{font-style:italic;color:var(--red)}
 .pill-sm{height:42px;padding:0 20px;font-size:14px}
 .on-cream .pill-solid{background:var(--ink);color:var(--cream)}
 .on-cream .pill-ghost{border-color:var(--line-cream);color:var(--ink)}
-.apple{font-size:17px;line-height:0;transform:translateY(-1px)}
+.apple{width:15px;height:18px;flex:none;margin-top:-2px}
 
 /* ── nav: fixed bar that inverts over light sections ── */
 nav{position:fixed;top:10px;left:10px;right:10px;z-index:80;height:72px;border-radius:16px;
@@ -135,33 +135,39 @@ nav.light .navlinks a.nav-cta{background:var(--ink);color:var(--cream)}
 .chapter .cta-link:hover{border-color:var(--ink)}
 .m-phone{display:none}
 
-/* ── dark tail ── */
-.tail{position:relative;z-index:6;background:var(--bg);border-radius:44px 44px 0 0;margin-top:-44px;
-  padding-top:1px}
+/* ── light tail: the page stays cream after the chapters ── */
+.tail{position:relative;z-index:6;background:var(--cream);color:var(--on-cream)}
+.tail h2{color:var(--ink)}
+/* ── dark close: CTA + footer pull back to the dark opening ── */
+.dark-close{position:relative;z-index:6;background:var(--bg);color:var(--on-dark);
+  border-radius:44px 44px 0 0;margin-top:clamp(40px,6vw,80px)}
+.dark-close h2{color:var(--on-dark)}
 
 /* verdict marquee */
-.marquee{overflow:hidden;padding:26px 0;border-bottom:1px solid var(--line-dark);margin-top:44px}
+.marquee{overflow:hidden;padding:26px 0;border-top:1px solid var(--line-cream);
+  border-bottom:1px solid var(--line-cream)}
 .marquee-track{display:flex;gap:40px;width:max-content;animation:tick 60s linear infinite}
 .marquee:hover .marquee-track{animation-play-state:paused}
 @keyframes tick{to{transform:translateX(-50%)}}
-.chip{display:inline-flex;align-items:center;gap:9px;font-size:14px;color:var(--on-dark-mute);white-space:nowrap}
-.chip b{color:var(--on-dark);font-weight:500}
+.chip{display:inline-flex;align-items:center;gap:9px;font-size:14px;color:var(--on-cream-mute);white-space:nowrap}
+.chip b{color:var(--ink);font-weight:500}
 .chip .dot{width:6px;height:6px;border-radius:50%}
-.v-best{color:#8FAF89}.v-fine{color:#C9C2B4}.v-mistake{color:#C99A4B}.v-blunder{color:#C25A4A}
+.v-best{color:#597F53}.v-fine{color:#7C7466}.v-mistake{color:#9A6F1F}.v-blunder{color:#A93E2C}
 
 /* section rhythm */
 .sec{padding:clamp(88px,11vw,150px) 0}
 .sec-head{text-align:center;max-width:20em;margin:0 auto clamp(48px,6vw,76px)}
-.sec-head p{color:var(--on-dark-mute);font-size:17px;margin-top:20px}
+.sec-head p{color:var(--on-cream-mute);font-size:17px;margin-top:20px}
+.dark-close .sec-head p,.dark-close p{color:var(--on-dark-mute)}
 
 /* 4-up card grid with dividers */
 .cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
 .card{position:relative;padding:0 22px 0 0}
-.card+.card{padding-left:22px;border-left:1px solid var(--line-dark)}
-.card .glyph{font-size:24px;line-height:1;margin-bottom:20px;color:var(--on-dark)}
+.card+.card{padding-left:22px;border-left:1px solid var(--line-cream)}
+.card .glyph{font-size:24px;line-height:1;margin-bottom:20px;color:var(--ink)}
 .card .glyph.r{color:var(--red)}
 .card h4{font-family:var(--serif);font-weight:400;font-size:23px;letter-spacing:-.02em;margin-bottom:10px}
-.card p{font-size:15px;color:var(--on-dark-mute)}
+.card p{font-size:15px;color:var(--on-cream-mute)}
 
 /* inset panel — the big stat moment */
 .panel{background:var(--panel);color:var(--ink);border-radius:24px;
@@ -214,8 +220,8 @@ footer{border-top:1px solid var(--line-dark);padding:clamp(52px,6vw,72px) 0 48px
   .cards{grid-template-columns:1fr 1fr;gap:0}
   .card{padding:24px 18px 24px 0}
   .card+.card{padding-left:0;border-left:none}
-  .card:nth-child(even){padding-left:18px;border-left:1px solid var(--line-dark)}
-  .card:nth-child(n+3){border-top:1px solid var(--line-dark)}
+  .card:nth-child(even){padding-left:18px;border-left:1px solid var(--line-cream)}
+  .card:nth-child(n+3){border-top:1px solid var(--line-cream)}
   .panel{grid-template-columns:1fr;gap:40px}
   .foot{grid-template-columns:1fr 1fr;gap:34px}
   .foot .brand{grid-column:1/-1}
@@ -223,7 +229,7 @@ footer{border-top:1px solid var(--line-dark);padding:clamp(52px,6vw,72px) 0 48px
 @media(max-width:560px){
   .cards{grid-template-columns:1fr}
   .card,.card:nth-child(even){padding:22px 0;border-left:none}
-  .card+.card{border-top:1px solid var(--line-dark)}
+  .card+.card{border-top:1px solid var(--line-cream)}
   .hero-cta{flex-direction:column;align-items:stretch}
   .hero-cta .pill{width:100%}
   .foot{grid-template-columns:1fr}
@@ -250,7 +256,7 @@ footer{border-top:1px solid var(--line-dark);padding:clamp(52px,6vw,72px) 0 48px
       <h1 data-split>Cash-game poker, taught properly.</h1>
       <p class="sub">Hone deals you real spots, grades every decision with a real poker engine, and tells you <b>in plain English</b> exactly where the money leaks.</p>
       <div class="hero-cta">
-        <a class="pill pill-solid" href="https://apps.apple.com/app/id6792246009"><span class="apple"></span>Get Hone free</a>
+        <a class="pill pill-solid" href="https://apps.apple.com/app/id6792246009"><svg class="apple" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>Get Hone free</a>
         <a class="pill pill-ghost" href="#how">See how it works</a>
       </div>
       <p class="hero-note">No account · No ads · Nothing leaves your phone · 18+</p>
@@ -368,11 +374,14 @@ footer{border-top:1px solid var(--line-dark);padding:clamp(52px,6vw,72px) 0 48px
     </div>
   </section>
 
+</div>
+
+<div class="dark-close">
   <section class="sec close" id="get">
     <div class="container fade">
       <h2 data-split>Find your level.</h2>
       <p>Ten hands is all it takes to know where you stand — and what to fix first.</p>
-      <a class="pill pill-solid" href="https://apps.apple.com/app/id6792246009"><span class="apple"></span>Get Hone free</a>
+      <a class="pill pill-solid" href="https://apps.apple.com/app/id6792246009"><svg class="apple" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>Get Hone free</a>
       <p class="note">Free · iPhone · iOS 17+ · hone.fun</p>
     </div>
   </section>
@@ -399,7 +408,7 @@ footer{border-top:1px solid var(--line-dark);padding:clamp(52px,6vw,72px) 0 48px
         <div>
           <h5>Get Hone</h5>
           <div class="foot-col">
-            <a class="pill pill-ghost pill-sm" href="https://apps.apple.com/app/id6792246009" style="align-self:start"><span class="apple"></span>App Store</a>
+            <a class="pill pill-ghost pill-sm" href="https://apps.apple.com/app/id6792246009" style="align-self:start"><svg class="apple" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>App Store</a>
           </div>
         </div>
       </div>
@@ -460,6 +469,7 @@ const story = document.getElementById('story');
 const clamp = (v, a, b) => Math.min(Math.max(v, a), b);
 
 const chapters = document.querySelector('.chapters');
+const darkClose = document.querySelector('.dark-close');
 let ticking = false;
 function frame() {
   ticking = false;
@@ -484,7 +494,7 @@ function frame() {
   nav.classList.toggle('solid', y > 12);
   const navMid = 46;
   const overCream = chapters.getBoundingClientRect().top < navMid + 40 || (wide && p > .88);
-  nav.classList.toggle('light', overCream && story.getBoundingClientRect().bottom > navMid);
+  nav.classList.toggle('light', overCream && darkClose.getBoundingClientRect().top > navMid);
 }
 addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }, {passive: true});
 addEventListener('resize', frame, {passive: true});

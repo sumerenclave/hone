@@ -31,10 +31,13 @@ nav{position:fixed;top:10px;left:10px;right:10px;z-index:80;height:72px;border-r
   font-weight:700;font-size:20px;letter-spacing:-.02em;border:0}
 .wordmark img{width:34px;height:34px;border-radius:8.5px;display:block}
 .wordmark i{font-style:normal;color:var(--red)}
-.pill{display:inline-flex;align-items:center;justify-content:center;height:42px;padding:0 20px;
+.pill{display:inline-flex;align-items:center;justify-content:center;gap:7px;height:42px;padding:0 18px;
   border-radius:999px;font-size:14px;font-weight:500;background:var(--ink);color:#F4F0E7;border:0;
   transition:transform .3s var(--ease)}
 .pill:hover{transform:translateY(-2px);border:0}
+/* Sized for the 42px pill, matching the nav CTA on index. These pages carry
+   their own style block, so the mark has to be defined here too. */
+.apple{width:13px;height:16px;flex:none;margin-top:-2px}
 
 main{max-width:720px;margin:0 auto;padding:clamp(130px,16vh,180px) var(--pad) clamp(80px,10vw,120px)}
 .updated{font-size:14px;color:rgba(23,19,14,.45);margin-bottom:18px}
@@ -57,7 +60,7 @@ footer{border-top:1px solid var(--line-dark);padding:34px var(--pad) 52px;font-s
 <body>
 <nav>
   <a class="wordmark" href="index.html"><img src="img/icon-64.png" alt="" width="64" height="64">Hone</a>
-  <a class="pill" href="https://apps.apple.com/app/id6792246009">Get the app</a>
+  <a class="pill" href="https://apps.apple.com/app/id6792246009"><svg class="apple" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>Get the app</a>
 </nav>
 <main>
   <p class="updated">Last updated · July 30, 2026</p>
